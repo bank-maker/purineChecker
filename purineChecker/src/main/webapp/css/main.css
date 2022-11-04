@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+h1{
+	text-align:center;
+	color:#ff6633;}
+p{
+	text-align:center;
+}
+#all{
+	padding: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 500px;
+	border: 1px solid #333333;
+	border-radius: 10px;
+}
+.input{
+	width:70px;
+	text-align: right;
+}
+#item{
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 15px;
+	width: 300px;
+	text-align: center;
+}
+#btn{
+	text-align: center;
+}
