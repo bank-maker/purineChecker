@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.Food" %>
-<% Food food = (Food)request.getAttribute("food"); %>
+    pageEncoding="UTF-8" import="model.Food, java.util.List" %>
+<% List<Food> foods = (List<Food>)request.getAttribute("foods"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>プリン体含有量チェッカー</title>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css" type="text/css">
 <style>
 p{
 	margin-bottom: 15px;
@@ -13,7 +14,21 @@ p{
 </style>
 </head>
 <body>
-<p>あなたが摂取した<%= food.getName() %>のプリン体含有量は<%= food.getPurineContent() %>mgです。</p>
-<a href="/purineChecker/PurineChecker">トップへ戻る</a>
+<div id="all">
+	<h1>★計算結果です</h1>
+	<div id="result">
+		<% for(int i = 0; i < foods.size(); i++){ %>
+		<p>あなたが摂取した<%= foods.get(i).getName() %>のプリン体含有量は<%= foods.get(i).getPurineContent() %>mgです。</p>
+		<% } %>
+		<% 
+		double total = 0;
+		for(Food food : foods) {
+			total += food.getPurineContent();
+		} 
+		%>
+		<p>プリン体摂取量合計は<%= total %>mgです。</p>
+	</div>
+	<a id="btn" href="/purineChecker/PurineChecker">トップへ戻る</a>
+</div>
 </body>
 </html>
