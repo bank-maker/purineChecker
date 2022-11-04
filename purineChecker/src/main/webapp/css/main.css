@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 h1{
-	text-align:center;
+	text-align: center;
 	color:#ff6633;}
 p{
-	text-align:center;
+	text-align: center;
 }
 #all{
 	padding: 10px;
@@ -13,18 +13,22 @@ p{
 	width: 500px;
 	border: 1px solid #333333;
 	border-radius: 10px;
+	text-align: center;
 }
 .input{
 	width:70px;
 	text-align: right;
 }
-#item{
+#item, #result{
 	margin-right: auto;
 	margin-left: auto;
-	margin-bottom: 15px;
-	width: 300px;
-	text-align: center;
+}
+#add{
+	color: blue;
+	border-bottom: 1px solid blue;
+	cursor: pointer;
 }
 #btn{
+	margin-top: 15px;
 	text-align: center;
 }

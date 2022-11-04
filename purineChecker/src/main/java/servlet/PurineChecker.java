@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,21 +26,35 @@ public class PurineChecker extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエストパラメータの取得
 		request.setCharacterEncoding("UTF-8");
-		String name = request.getParameter("name");
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		double contain = Double.parseDouble(request.getParameter("contain"));
+		//食品名の取得
+		String[] name = request.getParameterValues("name");
+		//摂取量の取得
+		int[] amount = new int[name.length];
+		for(int i = 0; i < name.length; i++) {
+			amount[i] = Integer.parseInt(request.getParameter("amount" + i));
+		}
+		//100gあたりのプリン体含有量の取得
+		double[] contain = new double[name.length];
+		for(int i = 0; i < name.length; i++) {
+			contain[i] = Double.parseDouble(request.getParameter("contain" + i));
+		}
 		
 		//リクエストパラメータのチェック
 		
 		//FoodインスタンスとCalculataインスタンスの生成
-		Food food = new Food(name, amount, contain);
+		List<Food> foods = new ArrayList<>();
+		for(int i = 0; i < name.length; i++) {
+			foods.add(new Food(name[i], amount[i], contain[i]));
+		}
 		Calculate calculate = new Calculate();
 		
 		//プリン体摂取量の計算
-		calculate.calculatePurine(food);
+		for(Food food : foods) {
+			calculate.calculatePurine(food);
+		}
 		
 		//リクエストスコープに保存
-		request.setAttribute("food", food);
+		request.setAttribute("foods", foods);
 		
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/result.jsp");
