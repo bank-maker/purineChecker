@@ -9,10 +9,12 @@ public class Food implements Serializable{
 	private double purineContent;		//摂取プリン体含有量
 	private double standardContent;	//100gあたりのプリン体含有量
 	//ｺﾝｽﾄﾗｸﾀ
-	public Food(String name, int quantity, double standardContent) {
+	public Food(String name, int quantity) {
 		this.setName(name);
 		this.setQuantity(quantity);
-		this.setStandardContent(standardContent);
+	}
+	public Food(String name) {
+		this.setName(name);
 	}
 	public Food() {	}
 	//getter, setter

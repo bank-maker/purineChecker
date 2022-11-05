@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="model.Food, java.util.List" %>
+<% List<Food> foods = (List<Food>)request.getAttribute("foods"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +15,11 @@
 	<form id="form1" action="/purineChecker/PurineChecker" method="post">
 		<div id="item">
 			食品1　　：<select class="input" name="name" style="vertical-align:left" required>
-							<option value="鶏肉">鶏肉</option>
-							<option value="豚肉">豚肉</option>
-							<option value="牛肉">牛肉</option>
+						<% for(Food food : foods){ %>
+							<option value="<%= food.getName() %>"><%= food.getName() %></option>
+						<% } %>
 						</select><br>
 			摂取量(整数)：<input class="input" type="number" name="amount0" min="0" value="200" required>(g)<br>
-			プリン体含有量：<input class="input" type="number" step="0.1" name="contain0" min="0" value="5.7" required>(mg)<br>
 			<br>
 		</div>
 		<a id="add">食品の追加</a>
@@ -43,12 +43,11 @@ let count = 1;
 function insert(){
 	count ++;
 	let html = '食品' + count + '　　：	<select class="input" name="name" style="vertical-align:left" required>' + 
-								'<option value="鶏肉">鶏肉</option>' + 
-								'<option value="豚肉">豚肉</option>' + 
-								'<option value="牛肉">牛肉</option>' + 
-							'</select><br>' + 
-				'摂取量(整数)：<input class="input" type="number" name="amount' + (count - 1) + '" min="0" value="200" required>(g)<br>' + 
-				'プリン体含有量：<input class="input" type="number" step="0.1" min="0" name="contain' + (count - 1) + '" value="5.7" required>(mg)<br><br>';
+										<% for(Food food : foods){ %>
+											'<option value="<%= food.getName() %>"><%= food.getName() %></option>' +
+										<% } %>
+										'</select><br>' + 
+				'摂取量(整数)：<input class="input" type="number" name="amount' + (count - 1) + '" min="0" value="200" required>(g)<br><br>';
 	document.getElementById('item').insertAdjacentHTML('beforeend', html);
 	
 }
