@@ -22,14 +22,10 @@
 			</select><br>
 			摂取量(整数)：
 			<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br>
-			<br>
 		</div>
-		<a id="add">食材の追加</a>
-		
-		<div id="btn">
-			<input type="submit" value="計算">
-			<input type="reset" value="リセット">
-		</div>
+		<a id="add">食材の追加</a><br>
+		<input type="submit" class="btn" value="計算">
+		<input type="reset" class="btn" value="リセット">
 	</form>
 </div>
 <script>
@@ -86,7 +82,7 @@ function add(){
 				<% } %>
 				'</select><br>' + 
 				'摂取量(整数)：' + 
-				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br><br></div>';
+				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br></div>';
 				
 	//最後の食材の後ろにHTMLを挿入
 	document.getElementById('item' + (count - 1)).insertAdjacentHTML('afterend', html);

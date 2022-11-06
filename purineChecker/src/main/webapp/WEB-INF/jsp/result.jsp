@@ -25,15 +25,15 @@ p{
 <div id="all">
 	<h1>★計算結果です</h1>
 	<div id="result">
-	<%-- 食品の数だけ結果を表示 --%>
+	<%-- 食品の数だけ結果(小数点第1位まで)を表示 --%>
 	<% for(int i = 0; i < foods.size(); i++){ %>
-		<p>あなたが摂取した<%= foods.get(i).getName() %>のプリン体含有量は<%= foods.get(i).getPurineContent() %>mgです。</p>
+		<p>あなたが摂取した<%= foods.get(i).getName() %>のプリン体含有量は<%= String.format("%.1f", foods.get(i).getPurineContent()) %>mgです。</p>
 	<% } %>
 		<p>プリン体摂取量合計は
 	<%-- 摂取量合計が400mgを超えたら数字を赤字で表示 --%>
 	<% if(total > 400){ %><span style="color:red;"><% }else{ %><span><% } %><%= total %></span>mgです。</p>
 	</div>
-	<a id="btn" href="/purineChecker/PurineChecker">トップへ戻る</a>
+	<a href="/purineChecker/PurineChecker">トップへ戻る</a>
 </div>
 </body>
 </html>
