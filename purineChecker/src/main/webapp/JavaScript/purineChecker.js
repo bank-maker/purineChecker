@@ -1,38 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.Food, java.util.List" %>
-<% List<Food> foods = (List<Food>)request.getAttribute("foods"); %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>プリン体含有量チェッカー</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css" type="text/css">
-</head>
-<body>
-<div id="all">
-	<h1>プリン体含有量チェッカー</h1>
-	<p>★今日の夕食のプリン体含有量をチェックしましょう。</p>
-	<form id="form1" action="/purineChecker/PurineChecker" method="post">
-		<div id="item1" class="foods">
-			食材 1　：
-			<select class="input" name="name" required>
-			<% for(Food food : foods){ %>
-				<option value="<%= food.getName() %>"><%= food.getName() %></option>
-			<% } %>
-			</select><br>
-			摂取量(整数)：
-			<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br>
-			<br>
-		</div>
-		<a id="add">食材の追加</a>
-		
-		<div id="btn">
-			<input type="submit" value="計算">
-			<button id="rst">リセット</button>
-		</div>
-	</form>
-</div>
-<script>
 //"リセット"ボタンにクリックイベントを追加
 document.getElementById('rst').addEventListener('click', check, false);
 function check(){
@@ -49,21 +14,22 @@ document.getElementById('add').addEventListener('click', add, false);
 
 //食材の数を1で初期化
 let count = 1;
+
 function add(){
 	//countを1増やす
 	count ++;
 	
 	//HTMLを準備
-	let html = '<div id="item' + count + '" class="foods">食材 ' + count + '　：' + 
+/*	let html = '<div id="item' + count + '" class="foods">食材 ' + count + '　：' + 
 				'<select class="input" name="name" required>' +
-				//foodの数だけ食材名の選択肢を追加 
+				//foodの数だけ食材名の選択肢を追加
 				<% for(Food food : foods){ %>
 					'<option value="<%= food.getName() %>"><%= food.getName() %></option>' +
 				<% } %>
 				'</select><br>' + 
 				'摂取量(整数)：' + 
 				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br><br></div>';
-				
+*/				
 	//最後の食材の後ろにHTMLを挿入
 	document.getElementById('item' + (count - 1)).insertAdjacentHTML('afterend', html);
 
@@ -87,6 +53,3 @@ function remove(){
 		document.getElementById('rem').remove()
 	}
 }
-</script>
-</body>
-</html>

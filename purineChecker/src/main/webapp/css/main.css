@@ -19,14 +19,18 @@ p{
 	width:70px;
 	text-align: right;
 }
-#item, #result{
+.foods, #result{
 	margin-right: auto;
 	margin-left: auto;
 }
-#add{
-	color: blue;
+#add, #rem{
 	border-bottom: 1px solid blue;
+	color: blue;
 	cursor: pointer;
+}
+#rem{
+	margin-left: 10px;
+	
 }
 #btn{
 	margin-top: 15px;
