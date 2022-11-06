@@ -40,7 +40,7 @@ public class PurineChecker extends HttpServlet {
 		String[] amount = request.getParameterValues("amount");
 		//摂取量はint型の配列に入れ替える
 		int[] quantity = new int[amount.length];
-		for(int i = 0; i < name.length; i++) {
+		for(int i = 0; i < amount.length; i++) {
 			quantity[i] = Integer.parseInt(amount[i]);
 		}
 		

@@ -1,13 +1,38 @@
-//"リセット"ボタンにクリックイベントを追加
-document.getElementById('rst').addEventListener('click', check, false);
-function check(){
-	//フォームの取り消し確認
-	let result = confirm('取り消しますか？');
-	if (result){
-		document.getElementById('form1').reset();
-		alert('取り消しました')
+//フォームに送信確認イベントを追加
+document.getElementById('form1').addEventListener('submit', function(event){
+	if(!check_submit()){
+		//イベント伝搬の停止
+		event.stopPropagation();
+		//イベントキャンセル
+		event.preventDefault();
+	}
+});
+function check_submit(){
+	//フォームの送信確認
+	if (confirm('送信しますか？')){
+		return true;
+	}else{
+		return false;
 	}
 }
+
+//"リセット"ボタンにクリックイベントを追加
+document.getElementById('form1').addEventListener('reset', function(event){
+		if(!check_reset()){
+			event.stopPropagation();
+			event.preventDefault();
+		}
+});
+
+function check_reset(){
+	//フォームのリセット確認
+	if (confirm('リセットしますか？')){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 
 //"食材の追加"ボタンのクリックイベントを追加
 document.getElementById('add').addEventListener('click', add, false);
