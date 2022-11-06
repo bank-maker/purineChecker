@@ -1,2 +1,2 @@
 # purineChecker
-<p>test commit</p>
+<p>転職活動のポートフォリオ用に作成しています。</p>
