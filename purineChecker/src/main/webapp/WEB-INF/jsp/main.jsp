@@ -22,30 +22,50 @@
 			</select><br>
 			摂取量(整数)：
 			<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br>
-			<br>
 		</div>
-		<a id="add">食材の追加</a>
-		
-		<div id="btn">
-			<input type="submit" value="計算">
-			<button id="rst">リセット</button>
-		</div>
+		<a id="add">食材の追加</a><br>
+		<input type="submit" class="btn" value="計算">
+		<input type="reset" class="btn" value="リセット">
 	</form>
 </div>
 <script>
+//フォームに送信確認イベントを追加
+document.getElementById('form1').addEventListener('submit', function(event){
+	if(!check_submit()){
+		//イベント伝搬の停止
+		event.stopPropagation();
+		//イベントキャンセル
+		event.preventDefault();
+	}
+});
+function check_submit(){
+	//フォームの送信確認
+	if (confirm('送信しますか？')){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 //"リセット"ボタンにクリックイベントを追加
-document.getElementById('rst').addEventListener('click', check, false);
-function check(){
-	//フォームの取り消し確認
-	let result = confirm('取り消しますか？');
-	if (result){
-		document.getElementById('form1').reset();
-		alert('取り消しました')
+document.getElementById('form1').addEventListener('reset', function(event){
+		if(!check_reset()){
+			event.stopPropagation();
+			event.preventDefault();
+		}
+});
+
+function check_reset(){
+	//フォームのリセット確認
+	if (confirm('リセットしますか？')){
+		return true;
+	}else{
+		return false;
 	}
 }
 
 //"食材の追加"ボタンのクリックイベントを追加
-document.getElementById('add').addEventListener('click', add, false);
+document.getElementById('add').addEventListener('click', add);
 
 //食材の数を1で初期化
 let count = 1;
@@ -62,7 +82,7 @@ function add(){
 				<% } %>
 				'</select><br>' + 
 				'摂取量(整数)：' + 
-				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br><br></div>';
+				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br></div>';
 				
 	//最後の食材の後ろにHTMLを挿入
 	document.getElementById('item' + (count - 1)).insertAdjacentHTML('afterend', html);
@@ -73,12 +93,12 @@ function add(){
 		document.getElementById('add').insertAdjacentHTML('afterend', html);
 		
 		//"食材を減らす"ボタンのクリックイベントを追加
-		document.getElementById('rem').addEventListener('click', remove, false);
+		document.getElementById('rem').addEventListener('click', remove);
 	}
 }
 
 function remove(){
-	//現時点で1番最後にある食材の要素を削除して、countを1減らす
+	//最後にある食材の要素を削除して、countを1減らす
 	document.getElementById('item' + count).remove();
 	count--;
 	
