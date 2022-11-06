@@ -14,12 +14,14 @@
 	<p>★今日の夕食のプリン体含有量をチェックしましょう。</p>
 	<form id="form1" action="/purineChecker/PurineChecker" method="post">
 		<div id="item">
-			食品1　　：<select class="input" name="name" style="vertical-align:left" required>
-						<% for(Food food : foods){ %>
-							<option value="<%= food.getName() %>"><%= food.getName() %></option>
-						<% } %>
-						</select><br>
-			摂取量(整数)：<input class="input" type="number" name="amount0" min="0" value="200" required>(g)<br>
+			食品1　　：
+			<select class="input" name="name" style="vertical-align:left" required>
+			<% for(Food food : foods){ %>
+				<option value="<%= food.getName() %>"><%= food.getName() %></option>
+			<% } %>
+			</select><br>
+			摂取量(整数)：
+			<input class="input" type="number" name="amount0" min="0" value="200" required>(g)<br>
 			<br>
 		</div>
 		<a id="add">食品の追加</a>
@@ -42,12 +44,14 @@ document.getElementById('add').addEventListener('click', insert, false);
 let count = 1;
 function insert(){
 	count ++;
-	let html = '食品' + count + '　　：	<select class="input" name="name" style="vertical-align:left" required>' + 
-										<% for(Food food : foods){ %>
-											'<option value="<%= food.getName() %>"><%= food.getName() %></option>' +
-										<% } %>
-										'</select><br>' + 
-				'摂取量(整数)：<input class="input" type="number" name="amount' + (count - 1) + '" min="0" value="200" required>(g)<br><br>';
+	let html = '食品' + count + '　　：	' + 
+				'<select class="input" name="name" style="vertical-align:left" required>' + 
+				<% for(Food food : foods){ %>
+					'<option value="<%= food.getName() %>"><%= food.getName() %></option>' +
+				<% } %>
+				'</select><br>' + 
+				'摂取量(整数)：' + 
+				'<input class="input" type="number" name="amount' + (count - 1) + '" min="0" value="200" required>(g)<br><br>';
 	document.getElementById('item').insertAdjacentHTML('beforeend', html);
 	
 }
