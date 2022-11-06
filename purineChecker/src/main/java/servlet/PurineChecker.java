@@ -19,10 +19,9 @@ public class PurineChecker extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//データベースにある食品名の取得
+		//データベースにある食材名の取得
 		Calculate calculate = new Calculate();
 		List<Food> foods = calculate.execute();
-		//System.out.println(foods.toString());		//リスト内容確認用
 		
 		//リクエストスコープに保存
 		request.setAttribute("foods", foods);
@@ -35,24 +34,26 @@ public class PurineChecker extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエストパラメータの取得
 		request.setCharacterEncoding("UTF-8");
-		//食品名の取得
+		//食材名の取得
 		String[] name = request.getParameterValues("name");
 		//摂取量の取得
-		int[] amount = new int[name.length];
+		String[] amount = request.getParameterValues("amount");
+		//摂取量はint型の配列に入れ替える
+		int[] quantity = new int[amount.length];
 		for(int i = 0; i < name.length; i++) {
-			amount[i] = Integer.parseInt(request.getParameter("amount" + i));
+			quantity[i] = Integer.parseInt(amount[i]);
 		}
 		
-		//リクエストパラメータのチェック
+		//リクエストパラメータのチェック(後で追加)
 		
 		//FoodインスタンスとCalculataインスタンスの生成
 		List<Food> foods = new ArrayList<>();
 		for(int i = 0; i < name.length; i++) {
-			foods.add(new Food(name[i], amount[i]));
+			foods.add(new Food(name[i], quantity[i]));
 		}
 		Calculate calculate = new Calculate();
 		
-		//プリン体摂取量の計算
+		//プリン体摂取量の計算とフィールド設定
 		calculate.calculatePurine(foods);
 		
 		//リクエストスコープに保存
