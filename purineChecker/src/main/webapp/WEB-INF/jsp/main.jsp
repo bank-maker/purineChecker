@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="model.Food, java.util.List" %>
-<% List<Food> foods = (List<Food>)request.getAttribute("foods"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>プリン体含有量チェッカー</title>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/main.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
 </head>
 <body>
 <div id="all">
@@ -16,9 +16,9 @@
 		<div id="item1" class="foods">
 			食材 1　：
 			<select class="input" name="name" required>
-			<% for(Food food : foods){ %>
-				<option value="<%= food.getName() %>"><%= food.getName() %></option>
-			<% } %>
+			<c:forEach var="food" items="${foods}">
+				<option value="${food.name}">${food.name}</option>
+			</c:forEach>
 			</select><br>
 			摂取量(整数)：
 			<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br>
@@ -69,6 +69,7 @@ document.getElementById('add').addEventListener('click', add);
 
 //食材の数を1で初期化
 let count = 1;
+
 function add(){
 	//countを1増やす
 	count ++;
@@ -77,9 +78,9 @@ function add(){
 	let html = '<div id="item' + count + '" class="foods">食材 ' + count + '　：' + 
 				'<select class="input" name="name" required>' +
 				//foodの数だけ食材名の選択肢を追加 
-				<% for(Food food : foods){ %>
-					'<option value="<%= food.getName() %>"><%= food.getName() %></option>' +
-				<% } %>
+				'<c:forEach var="food" items="${foods}">' +
+					'<option value="${food.name}">${food.name}</option>' +
+				'</c:forEach>' +
 				'</select><br>' + 
 				'摂取量(整数)：' + 
 				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br></div>';

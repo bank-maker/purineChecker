@@ -34,10 +34,13 @@ public class PurineChecker extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//リクエストパラメータの取得
 		request.setCharacterEncoding("UTF-8");
+		
 		//食材名の取得
 		String[] name = request.getParameterValues("name");
+		
 		//摂取量の取得
 		String[] amount = request.getParameterValues("amount");
+		
 		//摂取量はint型の配列に入れ替える
 		int[] quantity = new int[amount.length];
 		for(int i = 0; i < amount.length; i++) {
