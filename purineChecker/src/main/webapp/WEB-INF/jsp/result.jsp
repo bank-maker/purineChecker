@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="model.Food, java.util.List" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- プリン体摂取量の合計(total)を計算 --%>
 <c:set var="total" value="${0}"></c:set>
@@ -24,7 +24,7 @@ p{
 	<div id="result">
 	<%-- 食品の数だけ結果(小数点第1位まで)を表示 --%>
 	<c:forEach var="food" items="${foods}">
-		<p>あなたが摂取した${food.name}のプリン体含有量は${food.purineContent}mgです。</p>
+		<p>あなたが摂取した${food.name}のプリン体含有量は${String.format("%.1f", food.purineContent)}mgです。</p>
 	</c:forEach>
 		<p>プリン体摂取量合計は
 	<%-- 摂取量合計が400mgを超えたら数字を赤字で表示 --%>

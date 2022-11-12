@@ -25,7 +25,7 @@ public class FoodDao {
 		try(Connection conn = DriverManager.getConnection
 				(JDBC_URL, DB_USER, DB_PASS);){
 			//SELECT文を準備
-			String sql = "SELECT name FROM food";
+			String sql = "SELECT name FROM food ORDER BY type DESC, name";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			//結果を取得してFoodインスタンスを生成しリストに追加

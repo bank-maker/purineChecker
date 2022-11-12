@@ -33,9 +33,8 @@ function check_reset(){
 	}
 }
 
-
 //"食材の追加"ボタンのクリックイベントを追加
-document.getElementById('add').addEventListener('click', add, false);
+document.getElementById('add').addEventListener('click', add);
 
 //食材の数を1で初期化
 let count = 1;
@@ -45,16 +44,9 @@ function add(){
 	count ++;
 	
 	//HTMLを準備
-/*	let html = '<div id="item' + count + '" class="foods">食材 ' + count + '　：' + 
-				'<select class="input" name="name" required>' +
-				//foodの数だけ食材名の選択肢を追加
-				<% for(Food food : foods){ %>
-					'<option value="<%= food.getName() %>"><%= food.getName() %></option>' +
-				<% } %>
-				'</select><br>' + 
-				'摂取量(整数)：' + 
-				'<input class="input" type="number" name="amount" min="0" value="200" required>(g)<br><br></div>';
-*/				
+	let html = document.getElementById('test').innerHTML;
+	html = '<div id="item' + count + '" class="foods">食材 ' + count + '：' + html; 
+				
 	//最後の食材の後ろにHTMLを挿入
 	document.getElementById('item' + (count - 1)).insertAdjacentHTML('afterend', html);
 
@@ -64,12 +56,12 @@ function add(){
 		document.getElementById('add').insertAdjacentHTML('afterend', html);
 		
 		//"食材を減らす"ボタンのクリックイベントを追加
-		document.getElementById('rem').addEventListener('click', remove, false);
+		document.getElementById('rem').addEventListener('click', remove);
 	}
 }
 
 function remove(){
-	//現時点で1番最後にある食材の要素を削除して、countを1減らす
+	//最後にある食材の要素を削除して、countを1減らす
 	document.getElementById('item' + count).remove();
 	count--;
 	
