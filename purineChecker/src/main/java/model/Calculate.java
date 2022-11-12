@@ -16,10 +16,6 @@ public class Calculate {
 		//FoodDaoに100gあたりのプリン体含有量の取得を依頼
 		FoodDao dao = new FoodDao();
 		List<Food> foods = dao.findFood(getFoods);
-		System.out.println(foods.get(0).getName().strip() == foods.get(1).getName().strip());
-		System.out.println(foods.get(0).getName().trim());
-		System.out.println(foods.get(1).getName().trim());
-		
 		
 		for(Food food : foods) {
 			//100gあたりのプリン体含有量が0になっているときは
