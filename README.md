@@ -1,5 +1,7 @@
 # purineChecker
 <p>転職活動のポートフォリオ用に作成しています。</p>
+demo:https://user-images.githubusercontent.com/68983270/201661325-99683e1c-facd-4eba-8a79-799f84f8cc95.mp4
+
 <p>以下、システム概要(希望、願望、妄想を含みます。)</p>
 <h3>システム開発の目的</h3>
 	<ul>
@@ -46,4 +48,3 @@
 		<li>CRUD図</li>
 	</ul>
 <h3>その他</h3>
-https://user-images.githubusercontent.com/68983270/201661325-99683e1c-facd-4eba-8a79-799f84f8cc95.mp4
