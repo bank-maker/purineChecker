@@ -36,7 +36,7 @@ p{
 			<span>
 		</c:otherwise>
 	</c:choose>
-	<c:out value="${total}"></c:out></span>mgです。</p>
+	${String.format("%.1f", total)}</span>mgです。</p>
 	</div>
 	<a href="/purineChecker/PurineChecker">トップへ戻る</a>
 </div>

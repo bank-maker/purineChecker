@@ -19,6 +19,19 @@ public class Calculate {
 		
 		//フィールドの値から、食材ごとに摂取したプリン体摂取量を計算してセット
 		for(Food food : foods) {
+
+			//100gあたりのプリン体含有量が0になっているときは
+			if(food.getStandardContent() == 0.0) {
+				for(Food equalNameFood : foods) {
+					//同じ名前の入力のあるプリン体含有量を代入
+					if(food.getName().equals(equalNameFood.getName())) {
+						food.setStandardContent(equalNameFood.getStandardContent());
+						break;
+					}
+				}
+			}
+			
+			//フィールドの値から、食材ごとに摂取したプリン体摂取量を計算してセット
 			food.setPurineContent(food.getStandardContent() / 100 * food.getQuantity());
 		}
 	}

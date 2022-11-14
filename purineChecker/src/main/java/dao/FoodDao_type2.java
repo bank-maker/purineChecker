@@ -30,7 +30,7 @@ public class FoodDao_type2 {
 			//結果を取得してFoodインスタンスを生成しリストに追加
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Food food = new Food(rs.getString("name"));
+				Food food = new Food(rs.getString("name"), rs.getString("type"));
 				foods.add(food);
 			}
 			
