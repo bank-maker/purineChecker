@@ -17,7 +17,9 @@ public class Calculate {
 		FoodDao dao = new FoodDao();
 		List<Food> foods = dao.findFood(getFoods);
 		
+		//フィールドの値から、食材ごとに摂取したプリン体摂取量を計算してセット
 		for(Food food : foods) {
+
 			//100gあたりのプリン体含有量が0になっているときは
 			if(food.getStandardContent() == 0.0) {
 				for(Food equalNameFood : foods) {
