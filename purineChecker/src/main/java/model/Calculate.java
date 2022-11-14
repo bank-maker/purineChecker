@@ -24,7 +24,6 @@ public class Calculate {
 					//同じ名前の入力のあるプリン体含有量を代入
 					if(food.getName().equals(equalNameFood.getName())) {
 						food.setStandardContent(equalNameFood.getStandardContent());
-						System.out.println(food.getStandardContent());
 						break;
 					}
 				}

@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class Food implements Serializable{
 	private String name;				//食材名
 	private int quantity;				//摂取量(g)
+	private String type;				//食品の種類
 	private double purineContent;		//摂取プリン体含有量
 	private double standardContent;	//100gあたりのプリン体含有量(データベースで管理)
 	
@@ -14,8 +15,9 @@ public class Food implements Serializable{
 		this.setName(name);
 		this.setQuantity(quantity);
 	}
-	public Food(String name) {
+	public Food(String name, String type) {
 		this.setName(name);
+		this.setType(type);
 	}
 	public Food() {	}
 	
@@ -41,6 +43,16 @@ public class Food implements Serializable{
 		}
 		this.purineContent = purineContent;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		//種類は1文字以上
+		if(type == null || type.length() < 1) {
+			throw new IllegalArgumentException("種類を入力してください");
+		}
+		this.type = type;
+	}
 	
 	public int getQuantity() {
 		return this.quantity;
@@ -63,4 +75,5 @@ public class Food implements Serializable{
 		}
 		this.standardContent =standardContent;
 	}
+	
 }

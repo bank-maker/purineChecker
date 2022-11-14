@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import model.Food;
@@ -25,13 +24,13 @@ public class FoodDao {
 		try(Connection conn = DriverManager.getConnection
 				(JDBC_URL, DB_USER, DB_PASS);){
 			//SELECT文を準備
-			String sql = "SELECT name FROM food ORDER BY type DESC, name";
+			String sql = "SELECT name, type FROM food ORDER BY type DESC, name";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			//結果を取得してFoodインスタンスを生成しリストに追加
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				Food food = new Food(rs.getString("name"));
+				Food food = new Food(rs.getString("name"), rs.getString("type"));
 				foods.add(food);
 			}
 			
@@ -57,17 +56,24 @@ public class FoodDao {
 					foodNames += "\'" + foods.get(i).getName() + "\',";
 				}
 			}
+			
 			//食材名が一致するレコードのcontain列を取得
-			String sql = "SELECT contain FROM food WHERE name IN (" + foodNames + ")";
+			String sql = "SELECT name, contain FROM food WHERE name IN (" + foodNames + ")";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			//取得した値をリストの各食材にセット
 			ResultSet rs = ps.executeQuery();
-			Iterator foodsIt = foods.iterator();
-			while(rs.next() && foodsIt.hasNext()) {
+			while(rs.next()) {
+				String name = rs.getString("name");
 				double contain = rs.getDouble("contain");
-				Food food = (Food)foodsIt.next();
-				food.setStandardContent(contain);
+				
+				//取得した含有量と食材が一致するように名前で確認
+				for(Food food : foods) {
+					if(food.getName().equals(name)) {
+						food.setStandardContent(contain);
+						break;
+					}
+				}
 			}
 			
 			//リストを返す
