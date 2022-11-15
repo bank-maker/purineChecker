@@ -38,7 +38,7 @@ p{
 	</c:choose>
 	${String.format("%.1f", total)}</span>mgです。</p>
 	</div>
-	<a href="/purineChecker/PurineChecker">トップへ戻る</a>
+	<a href="/purineChecker/">トップへ戻る</a>
 </div>
 </body>
 </html>
